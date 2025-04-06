@@ -4,13 +4,10 @@
     --color-black: #000;
 }
 
-@font-face {
-    font-family: 'Gagalin', arial;
-    src: url(../pgvp/font/Gagalin-Regular.otf);
-} 
-
 * {
-    font-family: "Gagalin", arial;
+    font-family: 'Gagalin', sans-serif;
+    letter-spacing: 1px;
+    font-weight: normal;
     padding: 0;
     margin: 0;
 }
