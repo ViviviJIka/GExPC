@@ -7,8 +7,12 @@ fetch('https://gexpc.ru/api/services')
     return response.json();
   })
   .then(data => {
-    productsFromJSON = data; // Заполняем переменную данными
-        // Здесь можно вызывать функции для работы с данными
+    productsFromJSON = data;
+
+    productsFromJSON.sort(function(a, b) { // Сартирофка правилам буравчика
+        return a.price - b.price;
+    });
+
     renderServices();
   })
   .catch(error => {
@@ -125,6 +129,8 @@ function loadCart() {
     
         addControlButtonEvents(incButton, decButton);
         cartItemList.appendChild(templateClone);
+
+        calculateCartPrice();
     }
 }
     

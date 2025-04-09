@@ -13,7 +13,7 @@
     </head>
 
     <body>
-
+        <div class="body__inner">
         <!-- Хэдер страницы -->
         <header class="header">
             <div class="header__inner container">
@@ -27,11 +27,10 @@
                     <span class="header__cart-price"></span>
                     <a href="" class="button__cart">
                         <img src="img/open-cart.png" alt="Корзина" width="130px" height="45px">
-                        <!-- <span>Корзина</span> -->
                     </a>
                     
                     <!-- Корзина -->
-                    <div class="show-menu visible-none header__cart">
+                    <div class="show-menu visible-none">
 
                         <div class="cart-menu-title">
                             <h2 class="cart-title">Товары</h2>
@@ -105,12 +104,13 @@
                         <!-- Шаблон для добавления товара в корзину -->
                         <template id="product">
                             <li class="cart-menu-item">
-                                <div class="cart-item-product">
+                                <div class="cart-item-img">
                                     <img alt="" width="80px" height="60px">
-                                    <div class="cart-item-desc">
-                                        <h3 class="cart-item-name">-</h3>
-                                        <h3 class="cart-item-price">-</h3>
-                                    </div>
+                                </div>
+
+                                <div class="cart-item-desc">
+                                    <h3 class="cart-item-name">-</h3>
+                                    <h3 class="cart-item-price">-</h3>
                                 </div>
 
                                 <div class="cart-item-controls">
@@ -146,10 +146,25 @@
         <!-- Футер страницы -->
         <footer class="footer">
             <div class="footer__inner container">
-                
+                <div class="footer__top">
+                    <div class="footer__left">
+                        <p>GE⚔PC - Мы работаем по всей стране<br>Наши специалисты найдутся в вашем городе</p>
+                    </div>
+
+                    <div class="footer__right">
+                        <h3>Связаться с нами:</h3>
+                        <p>+79886690537 <br>saaamuraaaiii@gmail.com <br></p>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    © GE⚔PC 2025. Все права защищены. <br>
+                    <a href="docs/user-agreement.pdf" download="user-agreement.pdf" class="user-agreement">
+                        Пользовательское соглашение
+                    </a>
+                </div>
             </div>
         </footer>
-
+        </div>
         <script src="script.js"></script>
     </body>
 
