@@ -461,6 +461,15 @@ body {
     color: var(--color-white);
 }
 
+.IP {
+    text-decoration: underline;
+}
+
+.IP_text {
+    font-size: 14px;
+    font-weight: 100;
+}
+
 @media (max-width: 830px) {
     .services__list {
         grid-template-columns: 1fr;
@@ -579,5 +588,9 @@ body {
 
     .cart-item-controls {
         justify-self: end;
+    }
+
+    .IP_text {
+        font-size: 12px;
     }
 }
