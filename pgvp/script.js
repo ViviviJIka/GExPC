@@ -1,5 +1,4 @@
 let productsFromJSON = []; // Создаём переменную для хранения данных
- //test
   // Запрос товаров с сервера
 fetch('https://gexpc.ru/api/services')
   .then(response => {
@@ -54,7 +53,7 @@ const cartItemList = document.querySelector('.cart-menu-list'); // Список 
 const cartPrice = document.querySelector('.cart-price'); // Общая стоимость товаров в корзине
 const cartClearButton = document.querySelector('.cart-clear-button'); // Кнопка очистки корзины
 const headerCartPrice = document.querySelector('.header__cart-price'); // Сумма корзины рядом с кнопкой
-
+const cartPayButton = document.querySelector('.cart-pay-button'); // Кнопка оплаты товара
 cartItemList.innerHTML = '';
 
 let cart = JSON.parse(localStorage.getItem('cart')) || {};
@@ -215,4 +214,50 @@ cartClearButton.addEventListener('click', function(e) {
     cartItemList.innerHTML = '';
     cartPrice.textContent = `Общая цена: 0 руб.`;
     headerCartPrice.textContent = '';
+});
+
+
+
+cartPayButton.addEventListener('click', async function(e) {
+    e.preventDefault();
+    const form = document.querySelector('.cart-form');
+
+    const fullName = form.querySelector('input[type="firstname"]').value.trim();
+    const phone = form.querySelector('input[type="tel"]').value.trim();
+
+    const itemsList = Object.entries(cart).map(([name, item]) => ({
+        name,
+        price: item.price,
+        quantity: item.quantity,
+        photo: item.photo
+    }));
+
+    fetch('https://gexpc.ru/api/create-payment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            description: 'Оплата заказа',
+            customer: {
+                full_name: fullName ,
+                phone: phone,
+            },
+            itemsList: itemsList
+        })
+    })
+        .then(response => {
+            if (!response.ok) throw new Error('Ошибка при создании платежа');
+            return response.json();
+        })
+        .then(data => {
+            if (data.confirmation_url) {
+                window.location.href = data.confirmation_url;
+            } else {
+                console.log('Ответ от сервера:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка при оплате:', error);
+        });
 });
