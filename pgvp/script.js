@@ -1,5 +1,5 @@
 let productsFromJSON = []; // Создаём переменную для хранения данных
-
+ //test
   // Запрос товаров с сервера
 fetch('https://gexpc.ru/api/services')
   .then(response => {
