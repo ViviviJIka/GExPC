@@ -54,6 +54,8 @@ const cartPrice = document.querySelector('.cart-price'); // Общая стои�
 const cartClearButton = document.querySelector('.cart-clear-button'); // Кнопка очистки корзины
 const headerCartPrice = document.querySelector('.header__cart-price'); // Сумма корзины рядом с кнопкой
 const cartPayButton = document.querySelector('.cart-pay-button'); // Кнопка оплаты товара
+const tipsPayButton = document.querySelector('.tips__button-pay'); // Кнопка оплаты чаевых 
+
 cartItemList.innerHTML = '';
 
 let cart = JSON.parse(localStorage.getItem('cart')) || {};
@@ -216,8 +218,7 @@ cartClearButton.addEventListener('click', function(e) {
     headerCartPrice.textContent = '';
 });
 
-
-
+    // Оплата корзины
 cartPayButton.addEventListener('click', async function(e) {
     e.preventDefault();
     const form = document.querySelector('.cart-form');
@@ -244,6 +245,43 @@ cartPayButton.addEventListener('click', async function(e) {
                 phone: phone,
             },
             itemsList: itemsList
+        })
+    })
+        .then(response => {
+            if (!response.ok) throw new Error('Ошибка при создании платежа');
+            return response.json();
+        })
+        .then(data => {
+            if (data.confirmation_url) {
+                window.location.href = data.confirmation_url;
+            } else {
+                console.log('Ответ от сервера:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка при оплате:', error);
+        });
+});
+
+    // Оплата чаевых
+tipsPayButton.addEventListener('click', async function(e) {
+    e.preventDefault();
+
+    const tipsName = document.querySelector('.tips__input-name').textContent;
+    const tipsPhone = document.querySelector('.tips__input-phone').textContent;
+    const tipsPrice = document.querySelector('.tips__input-price').textContent;
+
+    fetch('https://gexpc.ru/api/create-donation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            customer: {
+                full_name: tipsName,
+                phone: tipsPhone,
+            },
+            amount: tipsPrice
         })
     })
         .then(response => {
