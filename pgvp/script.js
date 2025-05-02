@@ -267,9 +267,9 @@ cartPayButton.addEventListener('click', async function(e) {
 tipsPayButton.addEventListener('click', async function(e) {
     e.preventDefault();
 
-    const tipsName = document.querySelector('.tips__input-name').textContent;
-    const tipsPhone = document.querySelector('.tips__input-phone').textContent;
-    const tipsPrice = document.querySelector('.tips__input-price').textContent;
+    const tipsName = document.querySelector('.tips__input-name').value;
+    const tipsPhone = document.querySelector('.tips__input-phone').value;
+    const tipsPrice = document.querySelector('.tips__input-price').value;
 
     fetch('https://gexpc.ru/api/create-donation', {
         method: 'POST',
