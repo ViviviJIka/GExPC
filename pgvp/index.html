@@ -146,12 +146,14 @@
         <!-- Футер страницы -->
         <footer class="footer">
             <div class="footer__inner container">
+
                 <div class="footer__top">
-                    <div class="footer__left">
+
+                    <div class="footer__top-left">
                         <p>GE⚔PC - Мы работаем по всей стране<br>Наши специалисты найдутся в вашем городе</p>
                     </div>
 
-                    <div class="footer__mid">
+                    <div class="footer__top-mid">
                         <p class="IP">Индивидуальный предприниматель</p>
                         <div class="IP_text">
                             Колесников Даниил Сергеевич <br>
@@ -160,19 +162,36 @@
                         </div>
                     </div>
 
-                    <div class="footer__right">
+                    <div class="footer__top-right">
                         <h3>Связаться с нами:</h3>
                         <p>+79886690537 <br>saaamuraaaiii@gmail.com <br></p>
                     </div>
+
                 </div>
+                
                 <div class="footer__bottom">
-                    © GE⚔PC 2025. Все права защищены. <br>
-                    <a href="docs/user-agreement.pdf" download="user-agreement.pdf" class="user-agreement">
-                        Пользовательское соглашение
-                    </a>
+
+                    <div class="footer__bottom-left">
+                        © GE⚔PC 2025. Все права защищены. <br>
+                        <a href="docs/user-agreement.pdf" download="user-agreement.pdf" class="user-agreement">
+                            Пользовательское соглашение
+                        </a>
+                    </div>
+
+                    <div class="footer__bottom-right">
+                        <div class="tips__form">
+                            <h3 class="tips__form-text">Оставить чаевые</h3>
+                            <input type="text" id="name" class="tips__input tips__input-name" placeholder="Имя" required>
+                            <input type="tel" id="phone" pattern="[+]?[0-9]{11}" class="tips__input tips__input-phone" placeholder="Номер телефона" required>
+                            <input type="number" min="100" step="50" class="tips__input tips__input-price" placeholder="Сумма" required>
+                            <button class="tips__button-pay" type="submit">Оплатить</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </footer>
+
         </div>
         <script src="script.js"></script>
     </body>
