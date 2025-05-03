@@ -51,10 +51,12 @@ const cartButton = document.querySelector('.button__cart'); // Кнопка от
 const cartMenu = document.querySelector('.show-menu'); // Корзина
 const cartItemList = document.querySelector('.cart-menu-list'); // Список для товаров в корзине
 const cartPrice = document.querySelector('.cart-price'); // Общая стоимость товаров в корзине
+const cartTips = document.querySelector('.tips__input-price'); // Форма чаевых в корзине
 const cartClearButton = document.querySelector('.cart-clear-button'); // Кнопка очистки корзины
 const headerCartPrice = document.querySelector('.header__cart-price'); // Сумма корзины рядом с кнопкой
 const cartPayButton = document.querySelector('.cart-pay-button'); // Кнопка оплаты товара
 const tipsPayButton = document.querySelector('.tips__button-pay'); // Кнопка оплаты чаевых 
+
 
 cartItemList.innerHTML = '';
 
@@ -190,8 +192,8 @@ function calculateCartPrice() {
         totalPrice += Number(item.querySelector('.cart-item-count').textContent) * Number(item.querySelector('.cart-item-price').textContent.replace('Р', ''));
     })
 
-    headerCartPrice.textContent = totalPrice + ' руб.'
-    cartPrice.textContent = `Общая цена: ${totalPrice} руб.`;
+    headerCartPrice.textContent = totalPrice + Number(cartTips.value) + ' руб.';
+    cartPrice.textContent = `Общая цена: ${totalPrice + Number(cartTips.value)} руб.`;
 }
 
     // Открывание / закрывание меню
@@ -216,6 +218,8 @@ cartClearButton.addEventListener('click', function(e) {
     cartItemList.innerHTML = '';
     cartPrice.textContent = `Общая цена: 0 руб.`;
     headerCartPrice.textContent = '';
+
+    cartTips.value = '';
 });
 
     // Оплата корзины
@@ -229,9 +233,14 @@ cartPayButton.addEventListener('click', async function(e) {
     const itemsList = Object.entries(cart).map(([name, item]) => ({
         name,
         price: item.price,
-        quantity: item.quantity,
-        photo: item.photo
+        quantity: item.quantity
     }));
+
+    itemsList.push({
+        name: 'Чаевые',
+        price: cartTips.value,
+        quantity: 1
+    });
 
     fetch('https://gexpc.ru/api/create-payment', {
         method: 'POST',
@@ -299,3 +308,8 @@ tipsPayButton.addEventListener('click', async function(e) {
             console.error('Ошибка при оплате:', error);
         });
 });
+
+cartTips.onchange = function() {
+    console.log(cartTips.value);
+    calculateCartPrice();
+}
